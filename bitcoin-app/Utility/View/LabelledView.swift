@@ -52,14 +52,16 @@ class LabelledView: UIView {
     private func setupView() {
         addSubview(titleLabel)
         addSubview(contentLabel)
-        
-        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+
         titleLabel.topAnchor.constraint(greaterThanOrEqualTo: topAnchor).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: contentLabel.leftAnchor, constant: 8).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
         contentLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        contentLabel.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 8).isActive = true
         contentLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         contentLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
         contentLabel.widthAnchor.constraint(equalToConstant: 101).isActive = true
     }
 }
