@@ -30,6 +30,14 @@ class MainViewController: UIViewController {
         averageView.title = "Average:"
         highView.title = "High:"
         lowView.title = "Low:"
+        
+        let historyData = [
+            BitcoinHistory(time: Date(timeIntervalSinceNow: -1000), average: 1),
+            BitcoinHistory(time: Date(timeIntervalSinceNow: -500), average: 2),
+            BitcoinHistory(time: Date(), average: 1),
+        ]
+        
+        lineChartView.setHistoryData(historyData)
     }
 }
 

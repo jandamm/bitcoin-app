@@ -11,4 +11,9 @@ import Foundation
 struct BitcoinHistory: Codable {
     let time: Date
     let average: Double
+    
+    init(time: Date, average: Double) {
+        self.time = time
+        self.average = average
+    }
 }
