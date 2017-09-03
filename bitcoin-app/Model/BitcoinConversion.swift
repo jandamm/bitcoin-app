@@ -9,10 +9,10 @@
 import Foundation
 
 enum BitcoinConversion: String {
-    case euro
-    case dollar
-    case pound
-    
+    case euro = "EUR"
+    case dollar = "USD"
+    case pound = "GBP"
+
     private static let key = "ud_bitcoin_conversion"
 }
 
@@ -20,11 +20,11 @@ enum BitcoinConversion: String {
 extension BitcoinConversion {
 
     var symbol: String {
-        switch self {
-        case .euro: return "BTCEUR"
-        case .dollar: return "BTCUSD"
-        case .pound: return "BTCGBP"
-        }
+        return "BTC\(rawValue)"
+    }
+    
+    var title: String {
+        return "BTC to \(rawValue)"
     }
 }
 
