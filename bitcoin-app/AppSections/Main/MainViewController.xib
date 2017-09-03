@@ -21,6 +21,7 @@
                 <outlet property="lastLabel" destination="Dyp-i2-e0F" id="Vmg-EP-dzh"/>
                 <outlet property="lineChartView" destination="QYi-fa-tOB" id="WhD-AH-UFN"/>
                 <outlet property="lowView" destination="qH0-1L-qPM" id="dqW-Cf-Ifg"/>
+                <outlet property="menuController" destination="fkr-6A-0kg" id="Xat-Bl-aMq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -114,6 +115,48 @@
                     <rect key="frame" x="20" y="239.5" width="335" height="427.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yG6-U1-rFk">
+                    <rect key="frame" x="311" y="499" width="44" height="148"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHJ-pQ-X14" customClass="CurrencyButton" customModule="bitcoin_app" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="5UN-mR-e5S"/>
+                                <constraint firstAttribute="height" constant="44" id="uBN-rq-RsX"/>
+                            </constraints>
+                            <connections>
+                                <action selector="currencyButtonPressed:" destination="fkr-6A-0kg" eventType="touchUpInside" id="eNN-fM-Qpl"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0My-5H-Hi8" customClass="CurrencyButton" customModule="bitcoin_app" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="52" width="44" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Ogn-K3-t1R"/>
+                                <constraint firstAttribute="width" constant="44" id="tcA-ca-hY1"/>
+                            </constraints>
+                            <connections>
+                                <action selector="currencyButtonPressed:" destination="fkr-6A-0kg" eventType="touchUpInside" id="kyW-Zc-6Or"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5jP-0B-fTQ" customClass="CurrencyButton" customModule="bitcoin_app" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="104" width="44" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="bnV-SY-pdo"/>
+                                <constraint firstAttribute="height" constant="44" id="qTD-Bi-BeS"/>
+                            </constraints>
+                            <connections>
+                                <action selector="currencyButtonPressed:" destination="fkr-6A-0kg" eventType="touchUpInside" id="sT7-yQ-1wr"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="148" placeholder="YES" id="9QT-U0-r4A"/>
+                        <constraint firstAttribute="width" constant="44" id="Oiq-zf-BCC"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -123,9 +166,19 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QYi-fa-tOB" secondAttribute="trailing" constant="20" id="FVX-9Y-uHA"/>
                 <constraint firstItem="QYi-fa-tOB" firstAttribute="top" secondItem="Nfc-gT-f8J" secondAttribute="bottom" id="MRy-6G-Drs"/>
                 <constraint firstItem="Nfc-gT-f8J" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="P4i-tr-sB5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="yG6-U1-rFk" secondAttribute="bottom" constant="20" id="brJ-hz-SqB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yG6-U1-rFk" secondAttribute="trailing" constant="20" id="uJd-ar-DOa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Nfc-gT-f8J" secondAttribute="trailing" id="x3V-Z6-G2b"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
+        <customObject id="fkr-6A-0kg" customClass="MenuController" customModule="bitcoin_app" customModuleProvider="target">
+            <connections>
+                <outlet property="dollarButton" destination="0My-5H-Hi8" id="oNS-Xe-28I"/>
+                <outlet property="euroButton" destination="fHJ-pQ-X14" id="adt-va-lcK"/>
+                <outlet property="poundButton" destination="5jP-0B-fTQ" id="6sM-KM-Tyz"/>
+                <outlet property="stackView" destination="yG6-U1-rFk" id="6lq-Sg-ZwY"/>
+            </connections>
+        </customObject>
     </objects>
 </document>

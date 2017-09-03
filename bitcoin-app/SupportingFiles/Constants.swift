@@ -8,6 +8,10 @@
 
 import Foundation
 
+extension Notification {
+    static let currencyChanged: Name = Name(rawValue: "nc_currency_changed")
+}
+
 enum Api {
 
     static let refreshInterval: TimeInterval = 15
