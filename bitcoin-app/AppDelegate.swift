@@ -12,10 +12,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    private lazy var rootViewController: UINavigationController = UINavigationController()
+    private lazy var appCoordinator: AppCoordinator = AppCoordinator(with: self.rootViewController)
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let frame = UIScreen.main.bounds
+        let window = UIWindow(frame: frame)
+        
+        window.rootViewController = rootViewController
+        
+        appCoordinator.start()
+        
+        window.makeKeyAndVisible()
+        self.window = window
+
         return true
     }
 
