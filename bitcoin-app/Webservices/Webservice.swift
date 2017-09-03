@@ -8,6 +8,11 @@
 
 import Foundation
 
+protocol WebserviceObserver: class {
+    func webservice(_ webservice: Webservice, updatedTicker ticker: BitcoinTicker)
+    func webservice(_ webservice: Webservice, failedToUpdateTickerWithError error: Error)
+}
+
 protocol Webservice: class {
     typealias BitcoinTickerSuccess = (BitcoinTicker) -> Void
     typealias BitcoinTickerFailure = (Error) -> Void
@@ -24,17 +29,13 @@ protocol Webservice: class {
     func stopTicker()
 }
 
-protocol WebserviceObserver: class {
-    func webservice(_ webservice: Webservice, updatedTicker ticker: BitcoinTicker)
-    func webservice(_ webservice: Webservice, failedToUpdateTickerWithError error: Error)
-}
-
 extension Webservice {
 
     func restartTicker() throws {
         guard tickerObserver != nil else {
             throw WebserviceError.noObserver
         }
+
         startTicker(for: currentConversion, withObserver: tickerObserver, successCompletion: { _ in }, failureCompletion: { _ in })
     }
 }

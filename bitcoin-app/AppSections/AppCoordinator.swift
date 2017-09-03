@@ -12,6 +12,8 @@ class AppCoordinator: JDAppCoordinator {
     
     let webservice: Webservice
     
+    private weak var historyDataReceiver: HistoryDataReceiver?
+    
     convenience override init(with navigationController: UINavigationController) {
         let webservice = BitcoinService()
 
@@ -29,6 +31,10 @@ class AppCoordinator: JDAppCoordinator {
         
         showLaunchscreen()
         showMainViewController()
+        
+        webservice.getHistoryData(for: BitcoinConversion.get()) { data in
+            self.historyDataReceiver?.updateChart(with: data)
+        }
     }
     
     // MARK: - Show
@@ -42,6 +48,8 @@ class AppCoordinator: JDAppCoordinator {
     
     private func showMainViewController() {
         let mainViewController = MainViewController()
+        
+        historyDataReceiver = mainViewController
 
         webservice.startTicker(for: BitcoinConversion.get(), withObserver: mainViewController, successCompletion:  { ticker in
             self.navigationController.setNavigationBarHidden(false, animated: true)

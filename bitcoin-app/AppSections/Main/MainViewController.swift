@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol HistoryDataReceiver: class {
+    func updateChart(with historyData: [BitcoinHistory])
+}
+
 class MainViewController: UIViewController {
     
     @IBOutlet private weak var contentControl: UIControl!
@@ -24,6 +28,7 @@ class MainViewController: UIViewController {
     @IBOutlet private weak var lineChartView: HistoryChartView!
     
     private var lastFormatter: BitcoinFormatter<BitcoinTicker>?
+    private var historyData: [BitcoinHistory] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,14 +41,8 @@ class MainViewController: UIViewController {
         lowView.title = "Low:".localized
         
         contentControl.subviews.forEach { $0.isUserInteractionEnabled = false }
-        
-        let historyData = [
-            BitcoinHistory(time: Date(timeIntervalSinceNow: -1000), average: 1),
-            BitcoinHistory(time: Date(timeIntervalSinceNow: -500), average: 2),
-            BitcoinHistory(time: Date(), average: 1),
-        ]
-        
-        lineChartView.setHistoryData(historyData)
+
+        updateChart(with: historyData)
         updateView(with: lastFormatter)
     }
     
@@ -73,6 +72,14 @@ class MainViewController: UIViewController {
         averageView.content = formatter.currency(for: \.average)
         highView.content = formatter.currency(for: \.high)
         lowView.content = formatter.currency(for: \.low)
+    }
+}
+
+extension MainViewController: HistoryDataReceiver {
+
+    func updateChart(with historyData: [BitcoinHistory]) {
+        self.historyData = historyData
+        lineChartView?.setHistoryData(historyData)
     }
 }
 

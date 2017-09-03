@@ -14,6 +14,13 @@ class BitcoinService: NSObject, Webservice {
     private(set) var currentConversion: BitcoinConversion = .get()
     private(set) weak var tickerObserver: WebserviceObserver?
     
+    private var historyData: [BitcoinConversion: [BitcoinHistory]] = [:]
+    
+    func stopTicker() {
+        timer?.invalidate()
+        timer = nil
+    }
+
     func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver?, successCompletion: @escaping Webservice.BitcoinTickerSuccess, failureCompletion: @escaping Webservice.BitcoinTickerFailure) {
 
         if let observer = observer {
@@ -42,12 +49,33 @@ class BitcoinService: NSObject, Webservice {
     }
 
     func getHistoryData(for conversion: BitcoinConversion, completion: @escaping Webservice.BitcoinHistoryCompletion) {
+        guard let data = historyData[conversion] else {
+            downloadHistory(for: conversion, completion: completion)
+            return
+        }
         
+        completion(data)
     }
     
-    func stopTicker() {
-        timer?.invalidate()
-        timer = nil
+    
+    private func downloadHistory(for conversion: BitcoinConversion, completion: @escaping Webservice.BitcoinHistoryCompletion) {
+        let url = Api.Url.forHistory(with: conversion)
+        
+        Alamofire.request(url).responseJSON { response in
+            guard response.error == nil, let jsonData = response.data else {
+                completion([])
+                return
+            }
+            do {
+                let decoder = BitcoinApiDecoder()
+                var data = try decoder.decode([BitcoinHistory].self, from: jsonData)
+
+                data.sort { $0.time < $1.time }
+                completion(data)
+            } catch {
+                completion([])
+            }
+        }
     }
     
     private func getTickerData(for url: URL, successCompletion: Webservice.BitcoinTickerSuccess? = nil, failureCompletion: Webservice.BitcoinTickerFailure? = nil) {
