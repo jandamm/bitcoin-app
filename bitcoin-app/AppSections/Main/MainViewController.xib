@@ -110,8 +110,8 @@
                         <action selector="contentPressed:" destination="-1" eventType="touchUpInside" id="zND-63-76B"/>
                     </connections>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYi-fa-tOB" customClass="HistoryChartView" customModule="bitcoin_app" customModuleProvider="target">
-                    <rect key="frame" x="20" y="239.5" width="335" height="407.5"/>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYi-fa-tOB" customClass="HistoryChartView" customModule="bitcoin_app" customModuleProvider="target">
+                    <rect key="frame" x="20" y="239.5" width="335" height="427.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
@@ -119,7 +119,7 @@
             <constraints>
                 <constraint firstItem="QYi-fa-tOB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="4zw-tK-WSi"/>
                 <constraint firstItem="Nfc-gT-f8J" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="8gj-l4-yEh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QYi-fa-tOB" secondAttribute="bottom" constant="20" id="BjQ-4g-v3K"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QYi-fa-tOB" secondAttribute="bottom" id="BjQ-4g-v3K"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QYi-fa-tOB" secondAttribute="trailing" constant="20" id="FVX-9Y-uHA"/>
                 <constraint firstItem="QYi-fa-tOB" firstAttribute="top" secondItem="Nfc-gT-f8J" secondAttribute="bottom" id="MRy-6G-Drs"/>
                 <constraint firstItem="Nfc-gT-f8J" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="P4i-tr-sB5"/>

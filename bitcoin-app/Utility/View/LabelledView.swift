@@ -8,8 +8,9 @@
 
 import UIKit
 
+/// A view that will show two labels aligned
 class LabelledView: UIView {
-    
+
     private lazy var titleLabel: BaseLabel = {
         let titleLabel = BaseLabel()
         titleLabel.textColor = .lightText
@@ -26,12 +27,12 @@ class LabelledView: UIView {
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
         return contentLabel
     }()
-    
+
     var title: String? {
         get { return titleLabel.text }
         set(title) { titleLabel.text = title }
     }
-    
+
     var content: String? {
         get { return contentLabel.text }
         set(content) { contentLabel.text = content }
@@ -42,13 +43,13 @@ class LabelledView: UIView {
 
         setupView()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
         setupView()
     }
-    
+
     private func setupView() {
         addSubview(titleLabel)
         addSubview(contentLabel)

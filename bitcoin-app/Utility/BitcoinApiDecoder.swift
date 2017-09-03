@@ -8,15 +8,12 @@
 
 import Foundation
 
+/// A JSONDecoder with the correct dateFormatter for the Bitcoin REST Api.
 class BitcoinApiDecoder: JSONDecoder {
-    
+
     override init() {
         super.init()
 
-        setDateFormatter()
-    }
-    
-    private func setDateFormatter() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 

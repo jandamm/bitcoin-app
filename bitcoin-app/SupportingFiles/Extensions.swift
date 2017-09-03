@@ -13,7 +13,7 @@ extension String {
     var localized: String {
         return localized(comment: "")
     }
-    
+
     func localized(comment: String) -> String {
         return NSLocalizedString(self, comment: comment)
     }

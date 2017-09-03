@@ -22,11 +22,11 @@ extension BitcoinConversion {
     var symbol: String {
         return "BTC\(rawValue)"
     }
-    
+
     var title: String {
         return "BTC to \(rawValue)"
     }
-    
+
     var currency: String {
         switch self {
         case .euro: return "€"
@@ -42,7 +42,8 @@ extension BitcoinConversion {
     /// - returns: last stored conversion or default value
     static func get(from storage: BitcoinConversionStorage = UserDefaults.standard) -> BitcoinConversion {
         guard let value = storage.string(forKey: key),
-              let conversion = BitcoinConversion(rawValue: value) else {
+            let conversion = BitcoinConversion(rawValue: value) else {
+
             return .euro
         }
 

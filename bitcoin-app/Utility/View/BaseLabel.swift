@@ -8,11 +8,22 @@
 
 import UIKit
 
+@IBDesignable
 class BaseLabel: UILabel {
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
+        setup()
+    }
+
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+
+        setup()
+    }
+
+    private func setup() {
         textColor = .text
     }
 }

@@ -16,16 +16,16 @@ protocol WebserviceObserver: class {
 protocol Webservice: class {
     typealias BitcoinTickerSuccess = (BitcoinTicker) -> Void
     typealias BitcoinTickerFailure = (Error) -> Void
-    
+
     typealias BitcoinHistoryCompletion = ([BitcoinHistory]) -> Void
-    
+
     var currentConversion: BitcoinConversion { get }
     var tickerObserver: WebserviceObserver? { get }
 
     /// Omit the observer if you don't need an observer or you want to use the old one.
     func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver?, successCompletion: @escaping BitcoinTickerSuccess, failureCompletion: @escaping BitcoinTickerFailure)
     func getHistoryData(for conversion: BitcoinConversion, completion: @escaping BitcoinHistoryCompletion)
-    
+
     func stopTicker()
 }
 

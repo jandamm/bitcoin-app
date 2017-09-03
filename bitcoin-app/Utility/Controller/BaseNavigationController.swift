@@ -8,11 +8,12 @@
 
 import UIKit
 
+/// A NavigationController that will layout the navigationBar.
 class BaseNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationBar.barTintColor = .primary
         navigationBar.isTranslucent = false
     }

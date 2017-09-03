@@ -13,9 +13,9 @@ class BitcoinService: NSObject, Webservice {
 
     private(set) var currentConversion: BitcoinConversion = .get()
     private(set) weak var tickerObserver: WebserviceObserver?
-    
+
     private var historyData: [BitcoinConversion: [BitcoinHistory]] = [:]
-    
+
     func stopTicker() {
         timer?.invalidate()
         timer = nil
@@ -26,13 +26,13 @@ class BitcoinService: NSObject, Webservice {
         if let observer = observer {
             tickerObserver = observer
         }
-        
+
         currentConversion = conversion
 
         stopTicker()
 
         let url = Api.Url.forTicker(with: conversion)
-        
+
         getTickerData(for: url, successCompletion: successCompletion, failureCompletion: failureCompletion)
 
         guard tickerObserver != nil else {
@@ -53,14 +53,13 @@ class BitcoinService: NSObject, Webservice {
             downloadHistory(for: conversion, completion: completion)
             return
         }
-        
+
         completion(data)
     }
-    
-    
+
     private func downloadHistory(for conversion: BitcoinConversion, completion: @escaping Webservice.BitcoinHistoryCompletion) {
         let url = Api.Url.forHistory(with: conversion)
-        
+
         Alamofire.request(url).responseJSON { response in
             guard response.error == nil, let jsonData = response.data else {
                 completion([])
@@ -77,10 +76,10 @@ class BitcoinService: NSObject, Webservice {
             }
         }
     }
-    
+
     private func getTickerData(for url: URL, successCompletion: Webservice.BitcoinTickerSuccess? = nil, failureCompletion: Webservice.BitcoinTickerFailure? = nil) {
         Alamofire.request(url).responseJSON { response in
-            
+
             if let error = response.error {
                 failureCompletion?(error)
                 self.tickerObserver?.webservice(self, failedToUpdateTickerWithError: error)

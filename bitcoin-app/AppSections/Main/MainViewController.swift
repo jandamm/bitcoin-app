@@ -43,28 +43,29 @@ class MainViewController: UIViewController {
         contentControl.subviews.forEach { $0.isUserInteractionEnabled = false }
 
         updateChart(with: historyData)
-        updateView(with: lastFormatter)
+        updateContent(with: lastFormatter)
     }
     
     @IBAction private func contentPressed(_: UIControl) {
         let isHidden = additionalInfoStackView.isHidden
         additionalInfoStackView.alpha = isHidden ? 0 : 1
-        
-        
+
         UIView.animate(withDuration: 0.4) {
             self.additionalInfoStackView.isHidden = !isHidden
             self.additionalInfoStackView.alpha = !isHidden ? 0 : 1
         }
     }
     
-    private func updateView(with formatter: BitcoinFormatter<BitcoinTicker>?) {
+    private func updateContent(with formatter: BitcoinFormatter<BitcoinTicker>?) {
         guard let formatter = formatter, lastLabel != nil else { return }
+        
+        contentStackView.alpha = 1
         
         lastLabel.text = formatter.currency(for: \.last)
         changePriceLabel.text = formatter.currency(for: \.valueChange)
         changePercentLabel.text = formatter.percent(for: \.percentChange)
         
-        let color: UIColor = formatter.color(for: \.percentChange, threshold: 0.01) ?? .text
+        let color: UIColor = formatter.color(for: \.percentChange, threshold: 0.005) ?? .text
         
         changePercentLabel.textColor = color
         changePriceLabel.textColor = color
@@ -78,6 +79,12 @@ class MainViewController: UIViewController {
 extension MainViewController: HistoryDataReceiver {
 
     func updateChart(with historyData: [BitcoinHistory]) {
+        var historyData = historyData
+
+        if historyData.count > 365 {
+            historyData = Array(historyData.suffix(365))
+        }
+
         self.historyData = historyData
         lineChartView?.setHistoryData(historyData)
     }
@@ -88,10 +95,10 @@ extension MainViewController: WebserviceObserver {
     func webservice(_ webservice: Webservice, updatedTicker ticker: BitcoinTicker) {
         lastFormatter = BitcoinFormatter(ticker)
 
-        updateView(with: lastFormatter)
+        updateContent(with: lastFormatter)
     }
 
     func webservice(_ webservice: Webservice, failedToUpdateTickerWithError error: Error) {
-        
+        contentStackView?.alpha = 0.7
     }
 }
