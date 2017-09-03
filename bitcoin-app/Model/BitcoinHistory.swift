@@ -8,4 +8,7 @@
 
 import Foundation
 
-struct BitcoinHistory {}
+struct BitcoinHistory: Codable {
+    let time: Date
+    let average: Double
+}

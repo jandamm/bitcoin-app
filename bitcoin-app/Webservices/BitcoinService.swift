@@ -33,9 +33,17 @@ class BitcoinService: NSObject, Webservice {
                 return
             }
 
-            print(response.result.value)
-            
-            successCompletion(BitcoinTicker())
+            guard let jsonData = response.data else {
+                return
+            }
+
+            do {
+                let decoder = BitcoinApiDecoder()
+                let ticker = try decoder.decode(BitcoinTicker.self, from: jsonData)
+                successCompletion(ticker)
+            } catch {
+                failureCompletion(error)
+            }
         }
     }
 }
