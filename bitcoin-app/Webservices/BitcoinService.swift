@@ -8,4 +8,13 @@
 
 import Foundation
 
-class BitcoinService: NSObject, Webservice {}
+class BitcoinService: NSObject, Webservice {
+    
+    func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver, firstValue: @escaping (BitcoinTicker?) -> Void) {
+        
+    }
+
+    func getHistoryData(for conversion: BitcoinConversion, completion: @escaping ([BitcoinHistory]) -> Void) {
+        
+    }
+}

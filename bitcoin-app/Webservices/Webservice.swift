@@ -8,4 +8,11 @@
 
 import Foundation
 
-protocol Webservice: class {}
+protocol Webservice: class {
+    func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver, firstValue: @escaping (BitcoinTicker?) -> Void)
+    func getHistoryData(for conversion: BitcoinConversion, completion: @escaping ([BitcoinHistory]) -> Void)
+}
+
+protocol WebserviceObserver: class {
+    func webservice(_ webservice: Webservice, updatedTicker ticker: BitcoinTicker?)
+}
