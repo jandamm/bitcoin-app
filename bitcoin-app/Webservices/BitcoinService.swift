@@ -6,15 +6,36 @@
 //  Copyright © 2017 Jan Dammshäuser. All rights reserved.
 //
 
-import Foundation
+import Alamofire
 
 class BitcoinService: NSObject, Webservice {
     
-    func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver, firstValue: @escaping (BitcoinTicker?) -> Void) {
+    private var timer: Timer?
+    private weak var tickerObserver: WebserviceObserver?
+    
+    func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver, successCompletion: @escaping Webservice.BitcoinTickerSuccess, failureCompletion: @escaping Webservice.BitcoinTickerFailure) {
+        tickerObserver = observer
+
+        let url = Api.Url.forTicker(with: conversion)
         
+        getTickerData(for: url, successCompletion: successCompletion, failureCompletion: failureCompletion)
     }
 
-    func getHistoryData(for conversion: BitcoinConversion, completion: @escaping ([BitcoinHistory]) -> Void) {
+    func getHistoryData(for conversion: BitcoinConversion, completion: @escaping Webservice.BitcoinHistoryCompletion) {
         
+    }
+    
+    private func getTickerData(for url: URL, successCompletion: @escaping Webservice.BitcoinTickerSuccess, failureCompletion: @escaping Webservice.BitcoinTickerFailure) {
+        Alamofire.request(url).responseJSON { response in
+            
+            if let error = response.error {
+                failureCompletion(error)
+                return
+            }
+
+            print(response.result.value)
+            
+            successCompletion(BitcoinTicker())
+        }
     }
 }

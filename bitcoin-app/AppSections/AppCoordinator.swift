@@ -32,6 +32,9 @@ class AppCoordinator: JDAppCoordinator {
     
     private func showMainViewController() {
         let mainViewController = MainViewController()
-        setViewController(mainViewController)
+
+        webservice.startTicker(for: BitcoinConversion.conversion(), withObserver: mainViewController) { ticker in
+            self.setViewController(mainViewController)
+        }
     }
 }

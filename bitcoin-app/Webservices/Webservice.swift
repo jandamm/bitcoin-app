@@ -9,10 +9,16 @@
 import Foundation
 
 protocol Webservice: class {
-    func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver, firstValue: @escaping (BitcoinTicker?) -> Void)
-    func getHistoryData(for conversion: BitcoinConversion, completion: @escaping ([BitcoinHistory]) -> Void)
+    typealias BitcoinTickerSuccess = (BitcoinTicker) -> Void
+    typealias BitcoinTickerFailure = (Error) -> Void
+    
+    typealias BitcoinHistoryCompletion = ([BitcoinHistory]) -> Void
+    
+    func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver, successCompletion: @escaping BitcoinTickerSuccess, failureCompletion: @escaping BitcoinTickerFailure)
+    func getHistoryData(for conversion: BitcoinConversion, completion: @escaping BitcoinHistoryCompletion)
 }
 
 protocol WebserviceObserver: class {
-    func webservice(_ webservice: Webservice, updatedTicker ticker: BitcoinTicker?)
+    func webservice(_ webservice: Webservice, updatedTicker ticker: BitcoinTicker)
+    func webservice(_ webservice: Webservice, failedToUpdateTickerWithError error: Error)
 }

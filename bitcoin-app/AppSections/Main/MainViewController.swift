@@ -16,3 +16,9 @@ class MainViewController: UIViewController {
         title = "MainViewController"
     }
 }
+
+extension MainViewController: WebserviceObserver {
+
+    func webservice(_ webservice: Webservice, updatedTicker ticker: BitcoinTicker) {}
+    func webservice(_ webservice: Webservice, failedToUpdateTickerWithError error: Error) {}
+}
