@@ -43,7 +43,7 @@ class AppCoordinator: JDAppCoordinator {
     private func showMainViewController() {
         let mainViewController = MainViewController()
 
-        webservice.startTicker(for: BitcoinConversion.conversion(), withObserver: mainViewController, successCompletion:  { ticker in
+        webservice.startTicker(for: BitcoinConversion.get(), withObserver: mainViewController, successCompletion:  { ticker in
             self.navigationController.setNavigationBarHidden(false, animated: true)
             self.setViewController(mainViewController)
         }, failureCompletion: { error in

@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = BitcoinConversion.conversion().title
+        title = BitcoinConversion.get().title
 //        additionalInfoStackView.isHidden = true
         
         averageView.title = "Average:".localized
@@ -44,7 +44,15 @@ class MainViewController: UIViewController {
 extension MainViewController: WebserviceObserver {
 
     func webservice(_ webservice: Webservice, updatedTicker ticker: BitcoinTicker) {
+        let formatter = BitcoinFormatter(ticker)
         
+        lastLabel.text = formatter.currency(for: \.last)
+        changePriceLabel.text = formatter.currency(for: \.changes.price.day, signage: "+ ")
+        changePercentLabel.text = formatter.percent(for: \.changes.price.day, signage: "+ ")
+        
+        averageView.content = formatter.currency(for: \.averages.day)
+        highView.content = formatter.currency(for: \.high)
+        lowView.content = formatter.currency(for: \.low)
     }
 
     func webservice(_ webservice: Webservice, failedToUpdateTickerWithError error: Error) {
