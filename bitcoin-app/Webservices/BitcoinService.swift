@@ -20,7 +20,13 @@ class BitcoinService: NSObject, Webservice {
 
         let url = Api.Url.forTicker(with: conversion)
         
-        getTickerData(for: url, successCompletion: successCompletion, failureCompletion: failureCompletion)
+        getTickerData(for: url, successCompletion: { ticker in
+            successCompletion(ticker)
+            self.tickerObserver?.webservice(self, updatedTicker: ticker)
+        }, failureCompletion: { error in
+            failureCompletion(error)
+            self.tickerObserver?.webservice(self, failedToUpdateTickerWithError: error)
+        })
     }
 
     func getHistoryData(for conversion: BitcoinConversion, completion: @escaping Webservice.BitcoinHistoryCompletion) {

@@ -20,6 +20,8 @@ class MainViewController: UIViewController {
     @IBOutlet private weak var lowView: LabelledView!
     
     @IBOutlet private weak var lineChartView: HistoryChartView!
+    
+    private var lastFormatter: BitcoinFormatter<BitcoinTicker>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,21 +40,28 @@ class MainViewController: UIViewController {
         ]
         
         lineChartView.setHistoryData(historyData)
+        updateView(with: lastFormatter)
+    }
+    
+    private func updateView(with formatter: BitcoinFormatter<BitcoinTicker>?) {
+        guard let formatter = formatter, lastLabel != nil else { return }
+        
+        lastLabel.text = formatter.currency(for: \.last)
+        changePriceLabel.text = formatter.currency(for: \.valueChange)
+        changePercentLabel.text = formatter.percent(for: \.percentChange)
+        
+        averageView.content = formatter.currency(for: \.average)
+        highView.content = formatter.currency(for: \.high)
+        lowView.content = formatter.currency(for: \.low)
     }
 }
 
 extension MainViewController: WebserviceObserver {
 
     func webservice(_ webservice: Webservice, updatedTicker ticker: BitcoinTicker) {
-        let formatter = BitcoinFormatter(ticker)
-        
-        lastLabel.text = formatter.currency(for: \.last)
-        changePriceLabel.text = formatter.currency(for: \.changes.price.day, signage: "+ ")
-        changePercentLabel.text = formatter.percent(for: \.changes.price.day, signage: "+ ")
-        
-        averageView.content = formatter.currency(for: \.averages.day)
-        highView.content = formatter.currency(for: \.high)
-        lowView.content = formatter.currency(for: \.low)
+        lastFormatter = BitcoinFormatter(ticker)
+
+        updateView(with: lastFormatter)
     }
 
     func webservice(_ webservice: Webservice, failedToUpdateTickerWithError error: Error) {
