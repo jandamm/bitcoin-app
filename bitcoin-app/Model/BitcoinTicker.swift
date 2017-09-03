@@ -14,16 +14,28 @@ struct BitcoinTicker: Codable {
     let last: Double
     let high: Double
     let low: Double
-    let averages: TimedValues
     
-    let changes: Changes
+    var average: Double {
+        return averages.day
+    }
     
-    struct Changes: Codable {
+    var percentChange: Double {
+        return changes.percent.day / 100
+    }
+    
+    var valueChange: Double {
+        return changes.price.day
+    }
+    
+    private let averages: TimedValues
+    private let changes: Changes
+    
+    private struct Changes: Codable {
         let percent: TimedValues
         let price: TimedValues
     }
     
-    struct TimedValues: Codable {
+    private struct TimedValues: Codable {
         let day: Double
     }
     
