@@ -24,6 +24,10 @@ class AppCoordinator: JDAppCoordinator {
         self.webservice = webservice
 
         super.init(with: navigationController)
+        
+        NotificationCenter.default.addObserver(forName: Notification.currencyChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.downloadData(for: .get(), withObserver: webservice.tickerObserver, completion: {})
+        }
     }
 
     override func start() {
@@ -53,7 +57,7 @@ class AppCoordinator: JDAppCoordinator {
         }
     }
 
-    private func downloadData(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver, completion: @escaping () -> Void) {
+    private func downloadData(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver?, completion: @escaping () -> Void) {
         let dispatchGroup = DispatchGroup()
 
         dispatchGroup.enter()

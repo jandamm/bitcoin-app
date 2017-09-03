@@ -24,7 +24,7 @@ extension BitcoinConversion {
     }
 
     var title: String {
-        return "BTC to \(rawValue)"
+        return "BTC \("to".localized) \(rawValue)"
     }
 
     var currency: String {
@@ -32,6 +32,14 @@ extension BitcoinConversion {
         case .euro: return "€"
         case .dollar: return "$"
         case .pound: return "£"
+        }
+    }
+    
+    var imageName: String {
+        switch self {
+        case .euro: return "flag-europe-union-small"
+        case .dollar: return "flag-united-states-small"
+        case .pound: return "flag-great-britain-small"
         }
     }
 }
@@ -53,5 +61,6 @@ extension BitcoinConversion {
     /// Sets the conversion as the default conversion
     func save(to storage: BitcoinConversionStorage = UserDefaults.standard) {
         storage.set(rawValue, forKey: BitcoinConversion.key)
+        NotificationCenter.default.post(name: Notification.currencyChanged, object: nil)
     }
 }
