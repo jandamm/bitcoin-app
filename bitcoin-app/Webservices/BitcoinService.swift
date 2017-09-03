@@ -13,8 +13,10 @@ class BitcoinService: NSObject, Webservice {
     private var timer: Timer?
     private weak var tickerObserver: WebserviceObserver?
     
-    func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver, successCompletion: @escaping Webservice.BitcoinTickerSuccess, failureCompletion: @escaping Webservice.BitcoinTickerFailure) {
-        tickerObserver = observer
+    func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver?, successCompletion: @escaping Webservice.BitcoinTickerSuccess, failureCompletion: @escaping Webservice.BitcoinTickerFailure) {
+        if let observer = observer {
+            tickerObserver = observer
+        }
 
         let url = Api.Url.forTicker(with: conversion)
         
