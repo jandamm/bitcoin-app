@@ -19,6 +19,8 @@
 		A77DDE391F5C0548001DC413 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A77DDE371F5C0548001DC413 /* MainViewController.xib */; };
 		A77DDE3F1F5C05EE001DC413 /* Webservice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DDE3E1F5C05EE001DC413 /* Webservice.swift */; };
 		A77DDE411F5C060C001DC413 /* BitcoinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DDE401F5C060C001DC413 /* BitcoinService.swift */; };
+		A77DDE451F5C095C001DC413 /* BitcoinConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DDE441F5C095C001DC413 /* BitcoinConversion.swift */; };
+		A77DDE471F5C0B4C001DC413 /* BitcoinConversionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DDE461F5C0B4C001DC413 /* BitcoinConversionStorage.swift */; };
 		BD7B4DE45E628C851F16D96A /* Pods_bitcoin_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B45B418E9E826745DE887E1 /* Pods_bitcoin_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,8 @@
 		A77DDE371F5C0548001DC413 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		A77DDE3E1F5C05EE001DC413 /* Webservice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webservice.swift; sourceTree = "<group>"; };
 		A77DDE401F5C060C001DC413 /* BitcoinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinService.swift; sourceTree = "<group>"; };
+		A77DDE441F5C095C001DC413 /* BitcoinConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinConversion.swift; sourceTree = "<group>"; };
+		A77DDE461F5C0B4C001DC413 /* BitcoinConversionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinConversionStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 		A77DDE331F5C0503001DC413 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A77DDE441F5C095C001DC413 /* BitcoinConversion.swift */,
+				A77DDE461F5C0B4C001DC413 /* BitcoinConversionStorage.swift */,
 				A77DDE311F5C04D4001DC413 /* BitcoinTicker.swift */,
 				A77DDE341F5C0526001DC413 /* BitcoinHistory.swift */,
 			);
@@ -385,6 +391,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A77DDE471F5C0B4C001DC413 /* BitcoinConversionStorage.swift in Sources */,
+				A77DDE451F5C095C001DC413 /* BitcoinConversion.swift in Sources */,
 				A77DDE301F5C02BE001DC413 /* AppCoordinator.swift in Sources */,
 				A77DDE351F5C0526001DC413 /* BitcoinHistory.swift in Sources */,
 				A77DDE3F1F5C05EE001DC413 /* Webservice.swift in Sources */,
