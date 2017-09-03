@@ -10,7 +10,28 @@ import JDCoordinator
 
 class AppCoordinator: JDAppCoordinator {
     
+    private let webservice: Webservice
+    
+    convenience override init(with navigationController: UINavigationController) {
+        let webservice = BitcoinService()
+
+        self.init(with: navigationController, andWebservice: webservice)
+    }
+    
+    init(with navigationController: UINavigationController, andWebservice webservice: Webservice) {
+        self.webservice = webservice
+
+        super.init(with: navigationController)
+    }
+    
     override func start() {
         super.start()
+        
+        showMainViewController()
+    }
+    
+    private func showMainViewController() {
+        let mainViewController = MainViewController()
+        setViewController(mainViewController)
     }
 }
