@@ -27,9 +27,9 @@ class MainViewController: UIViewController {
         title = BitcoinConversion.conversion().title
 //        additionalInfoStackView.isHidden = true
         
-        averageView.title = "Average:"
-        highView.title = "High:"
-        lowView.title = "Low:"
+        averageView.title = "Average:".localized
+        highView.title = "High:".localized
+        lowView.title = "Low:".localized
         
         let historyData = [
             BitcoinHistory(time: Date(timeIntervalSinceNow: -1000), average: 1),
