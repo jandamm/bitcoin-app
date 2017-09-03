@@ -31,10 +31,6 @@ class AppCoordinator: JDAppCoordinator {
 
         showLaunchscreen()
         showMainViewController()
-
-        webservice.getHistoryData(for: BitcoinConversion.get()) { data in
-            self.historyDataReceiver?.updateChart(with: data)
-        }
     }
 
     // MARK: - Show
@@ -51,11 +47,29 @@ class AppCoordinator: JDAppCoordinator {
 
         historyDataReceiver = mainViewController
 
-        webservice.startTicker(for: BitcoinConversion.get(), withObserver: mainViewController, successCompletion: { _ in
+        downloadData(for: .get(), withObserver: mainViewController) {
             self.navigationController.setNavigationBarHidden(false, animated: true)
             self.setViewController(mainViewController)
+        }
+    }
+
+    private func downloadData(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver, completion: @escaping () -> Void) {
+        let dispatchGroup = DispatchGroup()
+
+        dispatchGroup.enter()
+        webservice.startTicker(for: conversion, withObserver: observer, successCompletion: { _ in
+            dispatchGroup.leave()
         }, failureCompletion: { error in
+            dispatchGroup.leave()
             NSLog(error.localizedDescription)
         })
+
+        dispatchGroup.enter()
+        webservice.getHistoryData(for: BitcoinConversion.get()) { data in
+            dispatchGroup.leave()
+            self.historyDataReceiver?.updateChart(with: data)
+        }
+
+        dispatchGroup.notify(queue: .main, execute: completion)
     }
 }
