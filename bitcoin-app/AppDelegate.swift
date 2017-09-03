@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    private lazy var rootViewController: UINavigationController = UINavigationController()
+    private lazy var rootViewController: BaseNavigationController = BaseNavigationController()
     private lazy var appCoordinator: AppCoordinator = AppCoordinator(with: self.rootViewController)
 
 

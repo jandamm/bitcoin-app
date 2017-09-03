@@ -27,13 +27,24 @@ class AppCoordinator: JDAppCoordinator {
     override func start() {
         super.start()
         
+        showLaunchscreen()
         showMainViewController()
+    }
+    
+    // MARK: - Show
+    private func showLaunchscreen() {
+        navigationController.setNavigationBarHidden(true, animated: false)
+        let storyboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "LaunchScreen")
+        
+        setViewController(viewController, animated: false)
     }
     
     private func showMainViewController() {
         let mainViewController = MainViewController()
 
         webservice.startTicker(for: BitcoinConversion.conversion(), withObserver: mainViewController, successCompletion:  { ticker in
+            self.navigationController.setNavigationBarHidden(false, animated: true)
             self.setViewController(mainViewController)
         }, failureCompletion: { error in
            NSLog(error.localizedDescription)
