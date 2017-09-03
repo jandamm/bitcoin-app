@@ -1,13 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="bitcoin_app" customModuleProvider="target">
             <connections>
+                <outlet property="additionalInfoStackView" destination="Y4d-ix-6tR" id="9yj-xO-BRU"/>
+                <outlet property="averageView" destination="DZx-q0-osp" id="2sM-q9-Yqk"/>
+                <outlet property="changePercentLabel" destination="SJD-T5-x51" id="MrI-gJ-uzH"/>
+                <outlet property="changePriceLabel" destination="m5T-fk-JPz" id="DIL-6H-KBd"/>
+                <outlet property="highView" destination="IUc-az-tOR" id="WuN-y2-uzi"/>
+                <outlet property="lastLabel" destination="Dyp-i2-e0F" id="Vmg-EP-dzh"/>
+                <outlet property="lineChartView" destination="QYi-fa-tOB" id="WhD-AH-UFN"/>
+                <outlet property="lowView" destination="qH0-1L-qPM" id="dqW-Cf-Ifg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,7 +26,88 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="E4G-Hy-Edr">
+                    <rect key="frame" x="67.5" y="40" width="240" height="179.5"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="h4w-0j-PdC">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="61.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="1234,56 €" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyp-i2-e0F" customClass="BaseLabel" customModule="bitcoin_app" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="42"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wNn-2q-4ah">
+                                    <rect key="frame" x="0.0" y="42" width="240" height="19.5"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 123,45 €" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5T-fk-JPz" customClass="BaseLabel" customModule="bitcoin_app" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="122.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 12,34 %" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJD-T5-x51" customClass="BaseLabel" customModule="bitcoin_app" customModuleProvider="target">
+                                            <rect key="frame" x="126.5" y="0.0" width="113.5" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="wNn-2q-4ah" firstAttribute="width" secondItem="Dyp-i2-e0F" secondAttribute="width" id="9BA-Be-npY"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Y4d-ix-6tR">
+                            <rect key="frame" x="0.0" y="81.5" width="240" height="98"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZx-q0-osp" customClass="LabelledView" customModule="bitcoin_app" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="30"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" placeholder="YES" id="uRP-ZS-Xse"/>
+                                        <constraint firstAttribute="width" constant="240" placeholder="YES" id="uwg-qi-alx"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUc-az-tOR" customClass="LabelledView" customModule="bitcoin_app" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="34" width="240" height="30"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="240" placeholder="YES" id="Su0-42-1Je"/>
+                                        <constraint firstAttribute="height" constant="30" placeholder="YES" id="ZDt-bF-Uaz"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qH0-1L-qPM" customClass="LabelledView" customModule="bitcoin_app" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="68" width="240" height="30"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" placeholder="YES" id="3ph-Lb-zjg"/>
+                                        <constraint firstAttribute="width" constant="240" placeholder="YES" id="seb-QE-5RC"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYi-fa-tOB" customClass="LineChartView" customModule="Charts">
+                    <rect key="frame" x="0.0" y="219.5" width="375" height="447.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="E4G-Hy-Edr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2WA-Xh-NkA"/>
+                <constraint firstItem="QYi-fa-tOB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="4zw-tK-WSi"/>
+                <constraint firstItem="QYi-fa-tOB" firstAttribute="top" secondItem="E4G-Hy-Edr" secondAttribute="bottom" id="6xu-ir-Dyw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QYi-fa-tOB" secondAttribute="bottom" id="BjQ-4g-v3K"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E4G-Hy-Edr" secondAttribute="trailing" id="F9d-yq-9ux"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QYi-fa-tOB" secondAttribute="trailing" id="FVX-9Y-uHA"/>
+                <constraint firstItem="E4G-Hy-Edr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="JSJ-ML-oT6"/>
+                <constraint firstItem="E4G-Hy-Edr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wXh-zy-E5u"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
     </objects>

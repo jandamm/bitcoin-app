@@ -17,4 +17,16 @@ extension UIColor {
     static var text: UIColor {
         return UIColor(red:0.01, green:0.01, blue:0.01, alpha:1.00)
     }
+    
+    static var lightText: UIColor {
+        return UIColor(red:0.31, green:0.31, blue:0.31, alpha:1.00)
+    }
+    
+    static var error: UIColor {
+        return UIColor(red:0.65, green:0.15, blue:0.09, alpha:1.00)
+    }
+    
+    static var success: UIColor {
+        return UIColor(red:0.16, green:0.56, blue:0.24, alpha:1.00)
+    }
 }

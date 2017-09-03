@@ -12,6 +12,7 @@ class LabelledView: UIView {
     
     private lazy var titleLabel: BaseLabel = {
         let titleLabel = BaseLabel()
+        titleLabel.textColor = .lightText
         titleLabel.textAlignment = .right
         titleLabel.font = .systemFont(ofSize: 13, weight: .medium)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +55,7 @@ class LabelledView: UIView {
         
         titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        titleLabel.topAnchor.constraint(greaterThanOrEqualTo: topAnchor).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: contentLabel.leftAnchor, constant: 8).isActive = true
         contentLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
         contentLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
