@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Charts
 
 class MainViewController: UIViewController {
     
@@ -20,7 +19,7 @@ class MainViewController: UIViewController {
     @IBOutlet private weak var highView: LabelledView!
     @IBOutlet private weak var lowView: LabelledView!
     
-    @IBOutlet private weak var lineChartView: LineChartView!
+    @IBOutlet private weak var lineChartView: HistoryChartView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
