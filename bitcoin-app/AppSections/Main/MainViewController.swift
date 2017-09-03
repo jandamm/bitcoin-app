@@ -27,13 +27,14 @@ class MainViewController: UIViewController {
     
     @IBOutlet private weak var lineChartView: HistoryChartView!
     
+    @IBOutlet private var menuController: MenuController!
+    
     private var lastFormatter: BitcoinFormatter<BitcoinTicker>?
     private var historyData: [BitcoinHistory] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = BitcoinConversion.get().title
+
         additionalInfoStackView.isHidden = true
         
         averageView.title = "Average:".localized
@@ -42,8 +43,14 @@ class MainViewController: UIViewController {
         
         contentControl.subviews.forEach { $0.isUserInteractionEnabled = false }
 
+        menuController.set(for: .get())
+        updateCurrencyValues()
         updateChart(with: historyData)
         updateContent(with: lastFormatter)
+        
+        NotificationCenter.default.addObserver(forName: Notification.currencyChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.updateCurrencyValues()
+        }
     }
     
     @IBAction private func contentPressed(_: UIControl) {
@@ -73,6 +80,11 @@ class MainViewController: UIViewController {
         averageView.content = formatter.currency(for: \.average)
         highView.content = formatter.currency(for: \.high)
         lowView.content = formatter.currency(for: \.low)
+    }
+    
+    private func updateCurrencyValues() {
+        let conversion = BitcoinConversion.get()
+        title = conversion.title
     }
 }
 

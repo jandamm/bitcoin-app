@@ -31,6 +31,8 @@
 		A7CD61B01F5C4494005D0C60 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7CD61B21F5C4494005D0C60 /* Localizable.strings */; };
 		A7CD61B81F5C4608005D0C60 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CD61B71F5C4608005D0C60 /* Extensions.swift */; };
 		A7CD61BB1F5C4845005D0C60 /* BitcoinFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CD61BA1F5C4845005D0C60 /* BitcoinFormatter.swift */; };
+		A7CD61BF1F5C7465005D0C60 /* CurrencyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CD61BE1F5C7465005D0C60 /* CurrencyButton.swift */; };
+		A7CD61C11F5C7A3D005D0C60 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CD61C01F5C7A3D005D0C60 /* MenuController.swift */; };
 		BD7B4DE45E628C851F16D96A /* Pods_bitcoin_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B45B418E9E826745DE887E1 /* Pods_bitcoin_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +81,8 @@
 		A7CD61B41F5C44B2005D0C60 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A7CD61B71F5C4608005D0C60 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A7CD61BA1F5C4845005D0C60 /* BitcoinFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinFormatter.swift; sourceTree = "<group>"; };
+		A7CD61BE1F5C7465005D0C60 /* CurrencyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyButton.swift; sourceTree = "<group>"; };
+		A7CD61C01F5C7A3D005D0C60 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,7 @@
 		A77DDE3A1F5C054F001DC413 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				A7CD61C01F5C7A3D005D0C60 /* MenuController.swift */,
 				A77DDE361F5C0548001DC413 /* MainViewController.swift */,
 				A77DDE371F5C0548001DC413 /* MainViewController.xib */,
 			);
@@ -182,6 +187,7 @@
 				A77DDE531F5C28D5001DC413 /* BaseLabel.swift */,
 				A77DDE551F5C2A17001DC413 /* LabelledView.swift */,
 				A7CD61AC1F5C3594005D0C60 /* HistoryChartView.swift */,
+				A7CD61BE1F5C7465005D0C60 /* CurrencyButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -456,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7CD61C11F5C7A3D005D0C60 /* MenuController.swift in Sources */,
 				A77DDE471F5C0B4C001DC413 /* BitcoinConversionStorage.swift in Sources */,
 				A7CD61AD1F5C3594005D0C60 /* HistoryChartView.swift in Sources */,
 				A77DDE541F5C28D5001DC413 /* BaseLabel.swift in Sources */,
@@ -466,6 +473,7 @@
 				A7CD61BB1F5C4845005D0C60 /* BitcoinFormatter.swift in Sources */,
 				A77DDE351F5C0526001DC413 /* BitcoinHistory.swift in Sources */,
 				A77DDE3F1F5C05EE001DC413 /* Webservice.swift in Sources */,
+				A7CD61BF1F5C7465005D0C60 /* CurrencyButton.swift in Sources */,
 				A77DDE4A1F5C0FCB001DC413 /* Constants.swift in Sources */,
 				A77DDE321F5C04D4001DC413 /* BitcoinTicker.swift in Sources */,
 				A77DDE501F5C24E0001DC413 /* BaseNavigationController.swift in Sources */,
