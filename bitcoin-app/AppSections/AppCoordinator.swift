@@ -10,7 +10,7 @@ import JDCoordinator
 
 class AppCoordinator: JDAppCoordinator {
     
-    private let webservice: Webservice
+    let webservice: Webservice
     
     convenience override init(with navigationController: UINavigationController) {
         let webservice = BitcoinService()

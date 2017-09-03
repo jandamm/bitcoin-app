@@ -9,35 +9,53 @@
 import Alamofire
 
 class BitcoinService: NSObject, Webservice {
-    
     private var timer: Timer?
-    private weak var tickerObserver: WebserviceObserver?
+
+    private(set) var currentConversion: BitcoinConversion = .get()
+    private(set) weak var tickerObserver: WebserviceObserver?
     
     func startTicker(for conversion: BitcoinConversion, withObserver observer: WebserviceObserver?, successCompletion: @escaping Webservice.BitcoinTickerSuccess, failureCompletion: @escaping Webservice.BitcoinTickerFailure) {
+
         if let observer = observer {
             tickerObserver = observer
         }
+        
+        currentConversion = conversion
+
+        stopTicker()
 
         let url = Api.Url.forTicker(with: conversion)
         
-        getTickerData(for: url, successCompletion: { ticker in
-            successCompletion(ticker)
-            self.tickerObserver?.webservice(self, updatedTicker: ticker)
-        }, failureCompletion: { error in
-            failureCompletion(error)
-            self.tickerObserver?.webservice(self, failedToUpdateTickerWithError: error)
-        })
+        getTickerData(for: url, successCompletion: successCompletion, failureCompletion: failureCompletion)
+
+        guard tickerObserver != nil else {
+            return
+        }
+
+        timer = Timer.scheduledTimer(withTimeInterval: Api.refreshInterval, repeats: true) { [weak self] _ in
+            guard self?.tickerObserver != nil else {
+                self?.stopTicker()
+                return
+            }
+            self!.getTickerData(for: url)
+        }
     }
 
     func getHistoryData(for conversion: BitcoinConversion, completion: @escaping Webservice.BitcoinHistoryCompletion) {
         
     }
     
-    private func getTickerData(for url: URL, successCompletion: @escaping Webservice.BitcoinTickerSuccess, failureCompletion: @escaping Webservice.BitcoinTickerFailure) {
+    func stopTicker() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func getTickerData(for url: URL, successCompletion: Webservice.BitcoinTickerSuccess? = nil, failureCompletion: Webservice.BitcoinTickerFailure? = nil) {
         Alamofire.request(url).responseJSON { response in
             
             if let error = response.error {
-                failureCompletion(error)
+                failureCompletion?(error)
+                self.tickerObserver?.webservice(self, failedToUpdateTickerWithError: error)
                 return
             }
 
@@ -48,9 +66,11 @@ class BitcoinService: NSObject, Webservice {
             do {
                 let decoder = BitcoinApiDecoder()
                 let ticker = try decoder.decode(BitcoinTicker.self, from: jsonData)
-                successCompletion(ticker)
+                successCompletion?(ticker)
+                self.tickerObserver?.webservice(self, updatedTicker: ticker)
             } catch {
-                failureCompletion(error)
+                failureCompletion?(error)
+                self.tickerObserver?.webservice(self, failedToUpdateTickerWithError: error)
             }
         }
     }
