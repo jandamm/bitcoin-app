@@ -23,10 +23,10 @@ extension UIColor {
     }
     
     static var error: UIColor {
-        return UIColor(red:0.65, green:0.15, blue:0.09, alpha:1.00)
+        return UIColor(red:1.00, green:0.22, blue:0.14, alpha:1.00)
     }
     
     static var success: UIColor {
-        return UIColor(red:0.16, green:0.56, blue:0.24, alpha:1.00)
+        return UIColor(red:0.24, green:0.85, blue:0.37, alpha:1.00)
     }
 }

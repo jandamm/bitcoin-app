@@ -6,7 +6,7 @@
 //  Copyright © 2017 Jan Dammshäuser. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct BitcoinFormatter<Base> {
     private let base: Base
@@ -26,6 +26,20 @@ struct BitcoinFormatter<Base> {
         numberFormatter.minimumFractionDigits = 2
         
         return format(keyPath: keyPath, signage: signage, formatter: numberFormatter)
+    }
+    
+    func color(for keyPath: KeyPath<Base, Double>, threshold: Double = 0) -> UIColor? {
+        let value = base[keyPath: keyPath]
+        
+        let isWithinThreshold = abs(value) <= abs(threshold)
+        
+        if isWithinThreshold {
+            return nil
+        } else if value < 0 {
+            return .error
+        } else {
+            return .success
+        }
     }
     
     private func format(keyPath: KeyPath<Base, Double>, signage: String = "", formatter: NumberFormatter) -> String? {

@@ -65,7 +65,7 @@ class MainViewController: UIViewController {
         changePriceLabel.text = formatter.currency(for: \.valueChange)
         changePercentLabel.text = formatter.percent(for: \.percentChange)
         
-        let color = formatter.color(for: \.percentChange)
+        let color: UIColor = formatter.color(for: \.percentChange, threshold: 0.01) ?? .text
         
         changePercentLabel.textColor = color
         changePriceLabel.textColor = color
