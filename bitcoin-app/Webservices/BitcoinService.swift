@@ -71,6 +71,7 @@ class BitcoinService: NSObject, Webservice {
 
                 data.sort { $0.time < $1.time }
                 completion(data)
+                self.historyData[conversion] = data
             } catch {
                 completion([])
             }
